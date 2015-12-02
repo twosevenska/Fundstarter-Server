@@ -29,6 +29,10 @@ public class UDP_starter extends Thread{
 		this.ipudp = idudp;
 	}
 	
+	public void set_portaudp1(int portaudp1)
+	{
+		this.portaudp1 = portaudp1;
+	}
 	
 	public void run()  {
 		porta= portaudp1;//servidor1

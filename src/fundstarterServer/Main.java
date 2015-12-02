@@ -9,9 +9,9 @@ import fundstarterServer.connectionTCPClient;
 
 public class Main {
 	public static String iprmi = "localhost";
-	public static Integer rmiport = 6000;
+	public static Integer rmiport = 7000;
 	public static String ipupd = "localhost";
-	public static Integer udpport = 5000;
+	public static Integer udpport = 6000;
 	
 	//secondary, RMI, secondary port, rmi port
 	
@@ -23,7 +23,7 @@ public class Main {
 		rmiport = Integer.getInteger(arguments[3]);
 	}
 	
-	
+	/*
 	private static void loadProperties(){
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -62,14 +62,11 @@ public class Main {
 			}
 		}
 	}	
-		
+		*/
     
 	public static void main(String[] args) {
 		Runtime.getRuntime().addShutdownHook(new Thread());
-		
-		if (args.length == 0){
-			loadProperties();
-		}else if(args.length == 4){
+		if(args.length == 4){
 			loadArguments(args);
 		}else{
 			System.out.println("Number of arguments invalid, starting with default port value = 6000 on server side and 7000 for RMI with localhost addresses" );
@@ -81,6 +78,7 @@ public class Main {
 		UDP_starter udp = new UDP_starter();
 		udp.set_ipudp(ipupd);
 		udp.set_tipo(2);
+		udp.set_portaudp1(udpport);
 		udp.start();
 		
 		while (udp.get_tipo()==2)
