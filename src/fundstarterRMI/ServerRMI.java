@@ -1,4 +1,4 @@
-package fundstarterServer;
+package fundstarterRMI;
 
 import globalClasses.Com_object;
 import globalClasses.Menu_list;

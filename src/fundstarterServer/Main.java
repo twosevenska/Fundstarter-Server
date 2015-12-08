@@ -8,23 +8,23 @@ import java.util.Properties;
 import fundstarterServer.connectionTCPClient;
 
 public class Main {
-	public static Integer port = 5000;
-	public static String iprmi = "localhost";
-	public static Integer rmiport = 7000;
-	public static String ipupd = "localhost";
-	public static Integer udpport = 6000;
+	public static Integer port;
+	public static String iprmi;
+	public static Integer rmiport;
+	public static String ipupd;
+	public static Integer udpport;
 	
 	
 	//secondary, RMI, secondary port, rmi port
 	
 
 	private static void loadArguments(String[] arguments){
-		port = Integer.getInteger(arguments[0]);
+		System.out.println(arguments[0]+" " + arguments[1]+" "+arguments[2]+" "+arguments[3] +" "+ arguments[4]);
+		port = Integer.parseInt(arguments[0]);
 		ipupd = arguments[1];
-		udpport = Integer.getInteger(arguments[2]);
+		udpport = Integer.parseInt(arguments[2]);
 		iprmi = arguments[3];
-		rmiport = Integer.getInteger(arguments[4]);
-		
+		rmiport = Integer.parseInt(arguments[4]);
 	}
 	
 	/*
@@ -94,6 +94,6 @@ public class Main {
 			}
 		}
 		Time_stuff timestart= new Time_stuff();
-		connectionTCPClient connTCP= new connectionTCPClient();
+		connectionTCPClient connTCP= new connectionTCPClient(port);
 	}
 }

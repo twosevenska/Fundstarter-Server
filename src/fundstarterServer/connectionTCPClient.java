@@ -11,12 +11,12 @@ public class connectionTCPClient extends Thread{
 	ArrayList<Connection> clientThreads;
 	ServerSocket listenSocket;
 	
-	public connectionTCPClient(){
+	public connectionTCPClient(int port){
 		clientThreads = new ArrayList<Connection>();
 		this.start();
 		try{
 			int numero=0;
-            int serverPort = Main.port;
+            int serverPort = port;
             System.out.println("Status: Listening on port "+ Main.port);
             listenSocket = new ServerSocket(serverPort);
             System.out.println("LISTEN SOCKET="+listenSocket);

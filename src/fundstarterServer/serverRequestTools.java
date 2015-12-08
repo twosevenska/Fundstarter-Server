@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.Hashtable;
 
+import fundstarterRMI.ServerRMI;
 import globalClasses.Com_object;
 import globalClasses.Menu_list;
 import globalClasses.Com_object.*;
@@ -16,7 +17,10 @@ public class serverRequestTools {
 	
 	public serverRequestTools()
 	{
+		System.out.println(Main.iprmi+" "+Main.rmiport);
 		try {
+			//rmi = (ServerRMI) Naming.lookup("rmi://localhost:7000/rmi");
+			
 			rmi = (ServerRMI) Naming.lookup("rmi://"+Main.iprmi+":"+Main.rmiport+"/rmi");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
