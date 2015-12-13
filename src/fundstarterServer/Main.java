@@ -74,6 +74,11 @@ public class Main {
 			loadArguments(args);
 		}else{
 			System.out.println("Number of arguments invalid, starting with default port value = 6000 on server side and 7000 for RMI with localhost addresses" );
+			port = 6000;
+			ipupd = "localhost";
+			udpport = 6060;
+			iprmi = "localhost";
+			rmiport = 7000;
 		}
 		
 		
