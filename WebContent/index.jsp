@@ -9,14 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	
-	<title>Basic Struts 2 Application - Welcome</title>
+	<title>Fundstarter</title>
 	
 	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="res/bootstrap/css/bootstrap.min.css">
-	<!-- JQuery core JS -->
-	<script src="res/jquery/jquery-1.11.3.min.js"></script>
-	<!-- Bootstrap core JS -->
- 	<script src="res/bootstrap/js/bootstrap.min.js"></script>
  	 <!-- Custom styles for this template -->
     <link type="text/css" rel="stylesheet"  href="res/css/style.css">
  	
@@ -51,6 +47,24 @@
 			<h1>Welcome To Struts 2!</h1>
 			<p class="lead"><a href="<s:url action='hello'/>">Hello World</a></p>
 		</div>
+		<table id="grid-data" class="table table-condensed table-hover table-striped">
+		    <thead>
+		        <tr>
+		            <th data-column-id="name" data-formatter="link">Name</th>
+		            <th data-column-id="status">Status</th>
+		            <th data-column-id="achieved">Achieved</th>
+		            <th data-column-id="date" data-order="desc">Date</th>
+		        </tr>
+		    </thead>
+		</table>
 	</div>
+	<!-- Scripts -->
+	<!-- Sonic's the name, speed's my game! -->
+	<!-- JQuery core JS -->
+	<script src="res/jquery/jquery-1.11.3.min.js"></script>
+	<!-- JQuery-Bootgrid core JS -->
+	<script src="res/bootgrid/jquery.bootgrid.js"></script>
+	<!-- Bootstrap core JS -->
+ 	<script src="res/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
