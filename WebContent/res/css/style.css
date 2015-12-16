@@ -1,9 +1,63 @@
-body {
-  padding-top: 50px;
-  background: #D2D2D2 !important;
+html{
+	height: 100%;
 }
 
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
+body {
+	padding-top: 50px;
+	background: #D2D2D2 !important;
+	height: 100%;
+}
+
+.project-body {
+	background: white;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 1200px;
+	overflow: hidden;
+	height: 100%;
+}
+
+.project-title {
+	padding: 5px 15px;
+}
+
+.project-info {
+	padding: 5px 15px;
+}
+
+.project-rewards thead{
+	background-color: white;
+}
+
+.projects-table {
+	background-color: #D2D2D2;
+}
+
+table thead{
+	background-color: #404040;
+	color: white;
+}
+
+nav {
+	background-color: #404040 !important;
+}
+
+.navbar-brand {
+	color: #D2D2D2 !important;
+}
+
+form div input {
+	border-radius: 4px;
+}
+
+.btn-success {
+	background-color: #17A9FE !important;
+	border-color: #17A0FE !important;
+}
+
+.btn-logout {
+	background-color: #FE5E62 !important;
+	border-color: #E05559 !important;
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	
-	<title>Fundstarter</title>
+	<title>Fundstarter - Add a Reward</title>
 	
 	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="res/bootstrap/css/bootstrap.min.css">
@@ -31,14 +32,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <s:textfield key="user" class="form-control"/>
-            </div>
-            <div class="form-group">
-              <s:password key="pass" class="form-control"/>
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-            <button type="submit" class="btn btn-success">Register</button>
+            <a href="#" class="btn btn-success">User Panel</a>
+            <a href="#" class="btn btn-danger">Logout</a>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -47,18 +42,36 @@
     <div class="project-body">
 		<div class="row project-title">
 			<div class="col-md-8">
-				<h1>Projects</h1>
+				<h1>Create Your Project!</h1>
 			</div>
 		</div>
 		
-		<div class="row project-info">
+		<div class="row project-title">
 			<div class="col-md-12">
-			<table id="table" class="projects-table"></table></div>
-		</div>	
-		<center><a href="<s:url action='hello'/>">Go to sample project</a></center>
-		<center><a href="<s:url action='user'/>">Go to sample user panel</a></center>
+				<form class="form-horizontal" role="form">
+				  <div class="form-group">
+				    <div class="col-sm-10"> 
+				    	<p>Short Description:</p>
+				      <input type="text" class="form-control" id="description" placeholder="What will the pledger receive?">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-10"> 
+				    	<p>Minimum amount:</p>
+				      <input type="number" class="form-control" id="amount" placeholder="Tell us the minimum ammount to pledge in this tier.">
+				    </div>
+				  </div>
+				  <div class="form-group"> 
+				    <div class="col-sm-10">
+				      <button href="<s:url action='reward'/>" type="submit" class="btn btn-default">Submit</button>
+				    </div>
+				  </div>
+				</form>
+			</div>
+		</div>
 	</div>
 	
+
 	<!-- Scripts -->
 	<!-- Sonic's the name, speed's my game! -->
 	<!-- JQuery core JS -->
@@ -67,39 +80,5 @@
  	<script src="res/bootstrap/js/bootstrap.min.js"></script>
  	<!-- Bootstrap-table core JS -->
  	<script src="res/bootstrap-table/bootstrap-table.js"></script>
- 	<!-- Populate Grid -->
- 	<script>
- 	$('#table').bootstrapTable({
- 	    columns: [{
- 	        field: 'name',
- 	        title: 'Project'
- 	    }, {
- 	        field: 'status',
- 	        title: 'Current Status'
- 	    }, {
- 	        field: 'percentage',
- 	        title: 'Goal'
- 	    },{
- 	        field: 'date',
- 	        title: 'Final Date'
- 	    },{
- 	        field: 'link',
- 	        title: 'Link'
- 	    }],
- 	    data: [{
- 	        name: 'Futurama',
- 	       	status: 'Active',
- 	      	percentage: '99999%',
- 	      	date: '31-02-2016',
- 	      	link: 'Lorem' 
- 	    }, {
- 	        name: 'Firefly',
- 	       	status: 'Canceled - But in our hearts',
- 	      	percentage: '99999%',
- 	      	date: '31-02-2016',
- 	      	link: 'Lorem' 
- 	    }]
- 	});
- 	</script>
 </body>
 </html>
