@@ -71,6 +71,9 @@
  	<script>
  	$('#table').bootstrapTable({
  	    columns: [{
+ 	        field: 'id',
+ 	        title: 'id'
+ 	    },{
  	        field: 'name',
  	        title: 'Project'
  	    }, {
@@ -87,12 +90,14 @@
  	        title: 'Link'
  	    }],
  	    data: [{
+ 	    	id: '1',
  	        name: 'Futurama',
  	       	status: 'Active',
  	      	percentage: '99999%',
  	      	date: '31-02-2016',
  	      	link: 'Lorem' 
  	    }, {
+ 	    	id: '1',
  	        name: 'Firefly',
  	       	status: 'Canceled - But in our hearts',
  	      	percentage: '99999%',
@@ -100,6 +105,11 @@
  	      	link: 'Lorem' 
  	    }]
  	});
+ 	$('#table').bootstrapTable('hideColumn', 'id');
+ 	
+ 	$('#table').on('click-row.bs.table', function (e, row, $element) {
+ 		window.location = 'hello';
+    });
  	</script>
 </body>
 </html>
