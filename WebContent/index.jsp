@@ -46,47 +46,48 @@
  	<script src="res/bootstrap-table/bootstrap-table.js"></script>
  	<!-- Populate Grid -->
  	<script>
- 	$('#table').bootstrapTable({
- 	    columns: [{
- 	        field: 'id',
- 	        title: 'id'
- 	    },{
- 	        field: 'name',
- 	        title: 'Project'
- 	    }, {
- 	        field: 'status',
- 	        title: 'Current Status'
- 	    }, {
- 	        field: 'percentage',
- 	        title: 'Goal'
- 	    },{
- 	        field: 'date',
- 	        title: 'Final Date'
- 	    },{
- 	        field: 'link',
- 	        title: 'Link'
- 	    }],
- 	    data: [{
- 	    	id: '1',
- 	        name: 'Futurama',
- 	       	status: 'Active',
- 	      	percentage: '99999%',
- 	      	date: '31-02-2016',
- 	      	link: 'Lorem' 
- 	    }, {
- 	    	id: '1',
- 	        name: 'Firefly',
- 	       	status: 'Canceled - But in our hearts',
- 	      	percentage: '99999%',
- 	      	date: '31-02-2016',
- 	      	link: 'Lorem' 
- 	    }]
- 	});
- 	$('#table').bootstrapTable('hideColumn', 'id');
+ 	var websocket = null;
+ 	var $table = $('#table');
  	
- 	$('#table').on('click-row.bs.table', function (e, row, $element) {
- 		window.location = 'hello';
-    });
+ 	
+    window.onload = function() { // URI = ws://10.16.0.165:8080/WebSocket/ws
+    	connect('ws://' + window.location.host + '/fundstarterServer/ws');
+    }
+
+    function connect(host) { // connect to the host websocket
+        if ('WebSocket' in window)
+            websocket = new WebSocket(host);
+        else if ('MozWebSocket' in window)
+            websocket = new MozWebSocket(host);
+        else {
+            writeToHistory('Get a real browser which supports WebSocket.');
+            return;
+        }
+
+        websocket.onopen    = onOpen; // set the event listeners below
+        websocket.onmessage = onMessage;
+        
+    }
+    
+    function onOpen(event) {
+    	websocket.send("refreshallprojects"); 
+    }
+    
+    function onMessage(message) { // print the received message
+        writeToHistory(message.data);
+        console.log(message.data);
+    }
+    
+    function writeToHistory(text) {
+    	var jsonstuff = JSON.parse(text);
+    	$table.bootstrapTable('destroy');
+     	$table.bootstrapTable(jsonstuff);
+     	$table.bootstrapTable('hideColumn', 'projId');
+     	
+     	$table.on('click-row.bs.table', function (e, row, $element) {
+     		window.location = 'hello';
+        });  	
+    }
  	</script>
 </body>
 </html>

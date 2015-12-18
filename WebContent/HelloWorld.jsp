@@ -66,23 +66,62 @@
  	<script src="res/bootstrap-table/bootstrap-table.js"></script>
  	<!-- Populate Status Grid -->
  	<script>
- 	$('#tablestatus').bootstrapTable({
- 	    columns: [{
- 	        field: 'status',
- 	        title: 'Status'
- 	    }, {
- 	        field: 'percentage',
- 	        title: 'Goal'
- 	    }, {
- 	        field: 'date',
- 	        title: 'Final Date'
- 	    }],
- 	    data: [{
- 	    	status: 'Active',
- 	    	percentage: '99999%',
- 	       	date: '31-02-2016',
- 	    }]
- 	});
+ 	var websocket = null;
+ 	var $table = $('#tablestatus');
+ 	
+ 	
+    window.onload = function() { // URI = ws://10.16.0.165:8080/WebSocket/ws
+    	connect('ws://' + window.location.host + '/fundstarterServer/ws');
+    }
+
+    function connect(host) { // connect to the host websocket
+        if ('WebSocket' in window)
+            websocket = new WebSocket(host);
+        else if ('MozWebSocket' in window)
+            websocket = new MozWebSocket(host);
+        else {
+            writeToHistory('Get a real browser which supports WebSocket.');
+            return;
+        }
+
+        websocket.onopen    = onOpen; // set the event listeners below
+        websocket.onmessage = onMessage;
+        
+    }
+    
+    function onOpen(event) {
+    	websocket.send("15");  // TODO: IDPROJECT!!!!!!!!!!!!!!!!!!!!!!!!!
+    }
+    
+    function onMessage(message) { // print the received message
+        writeToHistory(message.data);
+        console.log(message.data);
+    }
+    
+    function writeToHistory(text) {
+    	var jsonstuff = JSON.parse(text);
+    	$table.bootstrapTable('destroy');
+    	
+    	$table.bootstrapTable({
+     	    columns: [{
+     	        field: 'active',
+     	        title: 'Status'
+     	    }, {
+     	        field: 'progress',
+     	        title: 'Goal'
+     	    }, {
+     	        field: 'endDate',
+     	        title: 'Final Date'
+     	    }],
+     	    data: [jsonstuff]
+     	});
+    	
+     	$table.bootstrapTable('hideColumn', 'projId');
+     	
+     	$table.on('click-row.bs.table', function (e, row, $element) {
+     		window.location = 'hello';
+        });  	
+    }
  	</script>
  	<!-- Populate Rewards Grid -->
  	 <script>

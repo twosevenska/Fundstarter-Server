@@ -15,13 +15,19 @@ import globalClasses.Com_object.*;
 public class serverRequestTools {
 	public ServerRMI rmi;
 	
+	String iprmi;
+	String rmiport;
+	
 	public serverRequestTools()
 	{
+		String iprmi = Main.iprmi;
+		String rmiport = ""+Main.rmiport;
+		
 		System.out.println(Main.iprmi+" "+Main.rmiport);
 		try {
 			//rmi = (ServerRMI) Naming.lookup("rmi://localhost:7000/rmi");
 			
-			rmi = (ServerRMI) Naming.lookup("rmi://"+Main.iprmi+":"+Main.rmiport+"/rmi");
+			rmi = (ServerRMI) Naming.lookup("rmi://"+iprmi+":"+rmiport+"/rmi");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Wrong URL");
@@ -32,7 +38,7 @@ public class serverRequestTools {
 			while(i<3)
 			{
 				try {
-					rmi = (ServerRMI) Naming.lookup("rmi://"+Main.iprmi+":"+Main.rmiport+"/rmi");
+					rmi = (ServerRMI) Naming.lookup("rmi://"+iprmi+":"+rmiport+"/rmi");
 					i=4;
 				} catch (MalformedURLException | RemoteException
 						| NotBoundException e1) {
@@ -58,6 +64,8 @@ public class serverRequestTools {
 		}
 	}
 	
+	
+	
 	public void test_RMI()
 	{
 		try {
@@ -69,7 +77,7 @@ public class serverRequestTools {
 			while(i<3)
 			{
 				try {
-					rmi = (ServerRMI) Naming.lookup("rmi://"+Main.iprmi+":"+Main.rmiport+"/rmi");
+					rmi = (ServerRMI) Naming.lookup("rmi://"+iprmi+":"+rmiport+"/rmi");
 					i=4;
 				} catch (MalformedURLException | RemoteException
 						| NotBoundException e1) {
@@ -90,6 +98,49 @@ public class serverRequestTools {
 				System.exit(0);
 			}
 		} 
+	}
+	
+	public serverRequestTools(String iprmi, String rmiport)
+	{
+		System.out.println(Main.iprmi+" "+Main.rmiport);
+		try {
+			//rmi = (ServerRMI) Naming.lookup("rmi://localhost:7000/rmi");
+			
+			rmi = (ServerRMI) Naming.lookup("rmi://"+iprmi+":"+rmiport+"/rmi");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Wrong URL");
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			int i = 0;
+			System.out.println("A tentar reconnectar");
+			while(i<3)
+			{
+				try {
+					rmi = (ServerRMI) Naming.lookup("rmi://"+iprmi+":"+rmiport+"/rmi");
+					i=4;
+				} catch (MalformedURLException | RemoteException
+						| NotBoundException e1) {
+					// TODO Auto-generated catch block
+					System.out.println("A tentar reconnectar");
+					i++;
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e2) {
+						// TODO Auto-generated catch block
+						System.out.println("Erro ao dormir no serverRequestTools");
+					}
+				}
+			}
+			if (i==3)
+			{
+				System.out.println("Não foi possivel ligar ao RMI, o programa vai terminar");
+				System.exit(0);
+			}
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Binding não encontrado");
+		}
 	}
 	
 	public Com_object serverCallOperation(Com_object pack, String  id, operationtype op, Hashtable<String, String> content){
