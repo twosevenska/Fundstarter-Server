@@ -61,14 +61,31 @@ public class Web {
 			type = "refreshproject";
 			id = message;
 			
+			System.out.println("1");
+			
 			stuff = new Hashtable<String, String>();
 			stuff.put("projId" ,id);
+			
+			System.out.println("2");
+			
 			servertools.getProjectData(stuff);
+			
+			
+			System.out.println("3");
 			Com_object getProjectData = servertools.getProjectData(stuff);
+			
+			
+			System.out.println("4");
 			HashMap<String, String> map = new HashMap<String, String>(getProjectData.elements);
+			
+			System.out.println("5");
 			JSONObject jsonobject = new JSONObject(map);
+			
+			System.out.println("6");
 			try {
 				session.getBasicRemote().sendText(jsonobject+"");
+				
+				System.out.println("7");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				System.out.println("erro na socket");

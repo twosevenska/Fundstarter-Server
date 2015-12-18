@@ -102,7 +102,6 @@ public class serverRequestTools {
 	
 	public serverRequestTools(String iprmi, String rmiport)
 	{
-		System.out.println(Main.iprmi+" "+Main.rmiport);
 		try {
 			//rmi = (ServerRMI) Naming.lookup("rmi://localhost:7000/rmi");
 			
