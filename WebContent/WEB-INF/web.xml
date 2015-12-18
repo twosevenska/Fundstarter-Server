@@ -22,4 +22,23 @@
     <url-pattern>/*</url-pattern>  
   </filter-mapping>
  
+ 
+	<error-page>
+	<error-code>404</error-code>
+	<location>/broken.html</location>
+	</error-page>
+	
+	<error-page>
+	<error-code>403</error-code>
+	<location>/broken.html</location>
+	</error-page>
+ 
+   <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>no_access</web-resource-name>
+      <url-pattern>/logged/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint/>
+  </security-constraint>
+ 
 </web-app>  

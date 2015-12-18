@@ -5,9 +5,21 @@
 
 <struts>
 
-	<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="false" />
 
 	<package name="basicstruts2" extends="struts-default">
+
+		<interceptors>
+	 		<interceptor-stack name="appDefault">
+	        	 <interceptor-ref name="defaultStack">
+	      			<param name="exception.logEnabled">true</param>
+	      			<param name="exception.logLevel">ERROR</param>
+	      			<param name="params.excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*</param>
+	   			</interceptor-ref>
+	 	    </interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="appDefault" />
 
         <!-- If no class attribute is specified the framework will assume success and 
         render the result index.jsp -->
@@ -18,7 +30,7 @@
 		
 		<!-- If the URL is hello.action the call the execute method of class HelloWorldAction.
 		If the result returned by the execute method is success render the HelloWorld.jsp -->
-		<action name="hello" class="fundstarterWebServer.HelloWorldAction" method="execute">
+		<action name="hello" class="fundstarterWebServer.action.HelloWorldAction" method="execute">
 			<result name="success">/HelloWorld.jsp</result>
 		</action>
 		
@@ -32,6 +44,25 @@
 		
 		<action name="reward">
 			<result>logged/reward.jsp</result>
+		</action>
+		
+		<action name="welcome">
+			<result>welcome.jsp</result>
+        </action>
+		
+		<action name="login" class="fundstarterWebServer.action.Login"
+                method="login">
+            <result name="success">logged/index.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+		
+		<action name="logout" class="fundstarterWebServer.action.Login"
+                method="logout">
+            <result name="success">index.jsp</result>
+        </action>
+		
+		<action name="create">
+			<result>create.jsp</result>
 		</action>
 		
 		<action name="forum">
