@@ -12,5 +12,4 @@ public class Menu_list implements Serializable{
 		this.menuString = menuList;
 		this.menuID = idList;
 	}
-	
 }

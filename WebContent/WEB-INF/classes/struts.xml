@@ -5,8 +5,8 @@
 
 <struts>
 
+	<constant name="struts.action.excludePattern" value="/ws"/>
 	<constant name="struts.devMode" value="true" />
-
 	<package name="basicstruts2" extends="struts-default">
 
         <!-- If no class attribute is specified the framework will assume success and 
@@ -19,7 +19,7 @@
 		<!-- If the URL is hello.action the call the execute method of class HelloWorldAction.
 		If the result returned by the execute method is success render the HelloWorld.jsp -->
 		<action name="hello" class="fundstarterWebServer.HelloWorldAction" method="execute">
-			<result name="success">/HelloWorld.jsp</result>
+			<result>/HelloWorld.jsp</result>
 		</action>
 		
 		<action name="user">
@@ -39,5 +39,6 @@
 		</action>
 		
 	</package>
+	
 
 </struts>
