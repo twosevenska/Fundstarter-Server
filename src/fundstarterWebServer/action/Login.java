@@ -42,7 +42,7 @@ public class Login extends ActionSupport implements SessionAware {
 	   public String logout() {
 	       // remove userName from the session
 	       if (sessionMap.containsKey("userName")) {
-	           sessionMap.remove("userName");
+	           sessionMap.clear();;
 	       }
 	       return SUCCESS;
 	   }

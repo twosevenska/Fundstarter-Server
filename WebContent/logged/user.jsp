@@ -30,15 +30,21 @@
 		</div>
 		
 		<div class="row project-title">
+			<div class="col-md-8">
+				Wallet - ${wallet}
+			</div>
+		</div>
+		
+		<div class="row project-title">
 			<div class="col-md-1">
 				<a href="<s:url action='createProjectPage'/>" class="btn btn-primary btn-large">Create Project</a>
 			</div>
 		</div>
 		
-		<div class="row project-info">
-			<div class="col-md-12">
-			<p><b>My Rewards</b></p>
-			<table id="my-rewards-table" class="projects-table"></table></div>
+		<div class="row project-title">
+			<div class="col-md-1">
+				<a href="<s:url action='showUserRewards'/>" class="btn btn-primary btn-large">Show My Rewards</a>
+			</div>
 		</div>
 		
 		<div class="row project-info">
@@ -126,9 +132,10 @@
  	    	$table.bootstrapTable('destroy');
  	     	$table.bootstrapTable(jsonstuff);
  	     	$table.bootstrapTable('hideColumn', 'projId');
+ 	     	$table.bootstrapTable('hideColumn', 'link');
  	     	
  	     	$table.on('click-row.bs.table', function (e, row, $element) {
- 	     		window.location = 'hello';
+ 	     		window.location = 'projectPage'+row.projId;
  	        });  	
  	    }
  	</script>

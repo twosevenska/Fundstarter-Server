@@ -56,15 +56,87 @@ public class Web {
 		{
 			refreshAllProjects();
 		}
-		else if (parts[0].equals("projid"))
-		{
-			refreshproject(parts[1]);
-		}
 		else if (parts[0].equals("userId"))
 		{
 			refreshmyprojects(parts[1]);
 		}
+		else if (parts[0].equals("projid"))
+		{
+			refreshproject(parts[1]);
+		}
+		else if (parts[0].equals("rewardsid"))
+		{
+			refreshallrewards(parts[1],"0");//COLOCAR o ID DO USER!
+		}
+		else if (parts[0].equals("rewardsuserid"))
+		{
+			refreshmyrewards(parts[1]);
+		}
     }
+	private void refreshallrewards(String id, String userid)
+	{
+		int flag=0;
+		type = "projectList";
+		int i;
+		String json="{\"columns\": [{\"field\": \"description\",\"title\": \"Tier\"},{\"field\": \"ammount\",\"title\": \"Money\"}],\"data\": [";
+		Hashtable<String, String> content = new Hashtable<String, String>();
+		content.put("projId", id);
+		
+		Com_object object = servertools.getRewardsMenu(content);
+		
+		if (object.menuList.menuID.length>0)
+		{
+			flag = 1;
+			Hashtable<String, String> stuff = new Hashtable<String, String>();
+			stuff.put("rewId" ,object.menuList.menuID[0]);
+			stuff.put("userId" ,userid);
+			Com_object getProjectData = servertools.getTierInfo(stuff);
+			HashMap<String, String> map = new HashMap<String, String>(getProjectData.elements);
+			JSONObject jsonobject = new JSONObject(map);
+			json = json+jsonobject+"";
+			for (i=1; i<object.menuList.menuID.length; i++)
+			{
+				json = json+",";
+				stuff = new Hashtable<String, String>();
+				System.out.print(object.menuList.menuID[i]);
+				stuff.put("rewId" ,object.menuList.menuID[i]);
+				stuff.put("userId" ,userid);
+				getProjectData = servertools.getTierInfo(stuff);
+				map = new HashMap<String, String>(getProjectData.elements);
+				jsonobject = new JSONObject(map);
+				json = json+" "+jsonobject;
+				System.out.println(jsonobject);
+			}
+			
+		}
+		System.out.println("foi enviado o seguinte objecto JSON "+json);
+		sendMessage(json+"]}");//envia para todos os users
+	}
+	
+	
+	
+	//NOT DONE!
+	private void refreshmyrewards(String id)
+	{
+		int flag=0;
+		type = "projectList";
+		int i;
+		String json="";
+		Hashtable<String, String> content = new Hashtable<String, String>();
+		content.put("userId", id);
+		
+		Com_object object = servertools.getMyRewards(content);
+		
+		if (object.menuList.menuString.length>0)
+		{
+			for (i=0; i<object.menuList.menuID.length; i++)
+			{
+				json+=json+"\n";
+			}
+		}
+		System.out.println("foi enviado o seguinte objecto JSON "+json);
+		sendMessage(json+"");//envia para todos os users
+	}
 
 	private void refreshmyprojects(String id)
 	{

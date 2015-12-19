@@ -24,16 +24,15 @@
     <div class="project-body">
 		<div class="row project-title">
 			<div class="col-md-8">
-				<h1>Projects</h1>
+				<h1>Rewards</h1>
 			</div>
 		</div>
 		
 		<div class="row project-info">
 			<div class="col-md-12">
-			<table id="table" class="projects-table"></table></div>
+			<table id="tablerewards" class="projects-table"></table></div>
 		</div>	
 	</div>
-	
 	
 	<!-- Scripts -->
 	<!-- Sonic's the name, speed's my game! -->
@@ -46,8 +45,8 @@
  	<!-- Populate Grid -->
  	<script>
  	var websocket = null;
- 	var $table = $('#table');
- 	
+ 	var $table2 = $('#tablerewards');
+ 	var projectId = "<s:property value='projId'/>"; 	
  	
     window.onload = function() { // URI = ws://10.16.0.165:8080/WebSocket/ws
     	connect('ws://' + window.location.host + '/FundstarterServer/ws');
@@ -69,7 +68,7 @@
     }
     
     function onOpen(event) {
-    	websocket.send("refreshallprojects"); 
+    	websocket.send("rewardsid-"+projectId); 
     }
     
     function onMessage(message) { // print the received message
@@ -79,13 +78,13 @@
     
     function writeToHistory(text) {
     	var jsonstuff = JSON.parse(text);
-    	$table.bootstrapTable('destroy');
-     	$table.bootstrapTable(jsonstuff);
-     	$table.bootstrapTable('hideColumn', 'projId');
-     	$table.bootstrapTable('hideColumn', 'link');
+    	
+    	$table2.bootstrapTable('destroy');
+     	$table2.bootstrapTable(jsonstuff);
+     	$table2.bootstrapTable('hideColumn', 'projId');
      	
-     	$table.on('click-row.bs.table', function (e, row, $element) {
-     		window.location = 'projectPage'+row.projId;
+     	$table2.on('click-row.bs.table', function (e, row, $element) {
+     		window.location = 'hello';
         });  	
     }
  	</script>

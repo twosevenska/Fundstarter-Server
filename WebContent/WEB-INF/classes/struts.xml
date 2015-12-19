@@ -12,12 +12,17 @@
         <!-- If no class attribute is specified the framework will assume success and 
         render the result index.jsp -->
         <!-- If no name value for the result node is specified the success value is the default -->
-		<action name="index">
-			<result>index.jsp</result>
+		<action name="index" class="fundstarterWebServer.action.Index">
+			<result name="success">logged/index.jsp</result>
+			<result name="input">index.jsp</result>
 		</action>
 		
 		<action name="loginUser">
 			<result>loginUser.jsp</result>
+        </action>
+        
+        <action name="create">
+			<result>create.jsp</result>
         </action>
         
        	<action name="projectPage*" class="fundstarterWebServer.action.showProject">
@@ -61,6 +66,27 @@
             <result name="input">logged/index.jsp</result>
 		</action>
 		
+		<action name="deleteProject*" class="fundstarterWebServer.action.DeleteProject">
+			<param name="projId">{1}</param>
+			<result name="success">logged/index.jsp</result>
+			<result name="error">rightsLack.jsp</result>
+            <result name="input">index.jsp</result>
+		</action>
+		
+		<action name="showRewards*" class="fundstarterWebServer.action.ShowRewards">
+			<param name="projId">{1}</param>
+			<result name="success">projRewards.jsp</result>
+		</action>
+		
+		<action name="showUserRewards" class="fundstarterWebServer.action.ShowUserRewards">
+			<result name="success">logged/userRewards.jsp</result>
+            <result name="input">logged/index.jsp</result>
+		</action>
+		
+		<action name="redirect" class="fundstarterWebServer.action.Redirect">
+			<result name="error">logged/index.jsp</result>
+            <result name="input">index.jsp</result>
+		</action>
 
 	</package>
 

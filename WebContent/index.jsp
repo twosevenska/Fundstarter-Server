@@ -32,7 +32,6 @@
 			<div class="col-md-12">
 			<table id="table" class="projects-table"></table></div>
 		</div>	
-		<center><a href="<s:url action='projectPage'/>">Go to sample project</a></center>
 	</div>
 	
 	<!-- Scripts -->
@@ -81,7 +80,6 @@
     	var jsonstuff = JSON.parse(text);
     	$table.bootstrapTable('destroy');
      	$table.bootstrapTable(jsonstuff);
-     	$table.bootstrapTable('hideColumn', 'projId');
      	
      	$table.on('click-row.bs.table', function (e, row, $element) {
      		window.location = 'projectPage'+row.projId;

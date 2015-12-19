@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,10 +38,11 @@
 		</div>
 		
 		<div class="row project-info">
-			<div class="col-md-8"></div>
+			<div class="col-md-8">
+			</div>
 			<div class="col-md-4">
-				<p><b>Rewards</b></p>
-				<table id="tablerewards" class="project-rewards" data-card-view="true"></table>
+				<a href="<s:url action='forum'/>" class="btn btn-primary btn-large">Forum</a>
+				<input type="button" class="btn btn-primary btn-large" value="Show Rewards" onclick="showRewardsProject()" />
 			</div>
 		</div>
 		
@@ -48,7 +50,10 @@
 			<div class="col-md-8">
 			</div>
 			<div class="col-md-4">
-				<a href="<s:url action='forum'/>">Check the Forum</a>
+				<center><h4>Admin Tools</h4></center>
+				<input type="button" class="btn btn-danger btn-large" value="Delete Project" onclick="deleteProject()" />
+				<a href="<s:url action='createProjectPage'/>" class="btn btn-primary btn-large">Add Reward</a>
+				<a href="<s:url action='createProjectPage'/>" class="btn btn-primary btn-large">Delete Reward</a>
 			</div>
 		</div>
 		
@@ -89,7 +94,16 @@
     }
     
     function onOpen(event) {
-    	websocket.send("projid-"+projectId);  // TODO: IDPROJECT!!!!!!!!!!!!!!!!!!!!!!!!!
+    	websocket.send("projid-"+projectId); 
+    	
+    }
+    
+    function deleteProject(event) {
+    	window.location='deleteProject'+projectId;
+    }
+    
+    function showRewardsProject(event) {
+    	window.location='showRewards'+projectId;
     }
     
     function onMessage(message) { // print the received message
@@ -121,25 +135,6 @@
      		window.location = 'hello';
         });  	
     }
- 	</script>
- 	<!-- Populate Rewards Grid -->
- 	 <script>
- 	$('#tablerewards').bootstrapTable({
- 	    columns: [{
- 	        field: 'money',
- 	        title: 'Tier'
- 	    }, {
- 	        field: 'reward',
- 	        title: 'Reward'
- 	    }],
- 	    data: [{
- 	        money: '15',
- 	       	reward: 'You get a backer T-Shirt',
- 	    }, {
- 	        money: '35',
- 	       	reward: 'You get a Toy of Bender',
- 	    }]
- 	});
  	</script>
 </body>
 </html>
