@@ -20,7 +20,8 @@
 			<result>loginUser.jsp</result>
         </action>
         
-       	<action name="projectPage">
+       	<action name="projectPage*" class="fundstarterWebServer.action.showProject">
+			<param name="projId">{1}</param>
 			<result>projectPage.jsp</result>
         </action>
         

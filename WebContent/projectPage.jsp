@@ -23,13 +23,13 @@
     <div class="project-body">
 		<div class="row project-title">
 			<div class="col-md-8">
-				<h1>Futurama</h1>
+				<h1> ${projTitle} </h1>
 			</div>
 		</div>
 		
 		<div class="row project-title">
 			<div class="col-md-8">
-				<p>Futurama is an American adult animated science fiction sitcom created by Matt Groening for the Fox Broadcasting Company. The series follows the adventures of a late-20th-century New York City pizza delivery boy, Philip J. Fry, who, after being unwittingly cryogenically frozen for one thousand years, finds employment at Planet Express, an interplanetary delivery company in the retro-futuristic 31st century. The series was envisioned by Groening in the late 1990s while working on The Simpsons, later bringing Cohen aboard to develop storylines and characters to pitch the show to Fox.</p>
+				<p>${projDescri}</p>
 			</div>
 			<div class="col-md-4">
 				<table id="tablestatus" data-card-view="true"></table>
@@ -37,9 +37,7 @@
 		</div>
 		
 		<div class="row project-info">
-			<div class="col-md-8">
-				<p>In the United States, the series aired on Fox from March 28, 1999, to August 10, 2003, before ceasing production. Futurama also aired in reruns on Cartoon Network's Adult Swim from 2002 to 2007, until the network's contract expired. It was revived in 2008 as four direct-to-video films; the last of which was released in early 2009. Comedy Central entered into an agreement with 20th Century Fox Television to syndicate the existing episodes and air the films as 16 new, half-hour episodes, constituting a fifth season.</p>
-			</div>
+			<div class="col-md-8"></div>
 			<div class="col-md-4">
 				<p><b>Rewards</b></p>
 				<table id="tablerewards" class="project-rewards" data-card-view="true"></table>
@@ -68,7 +66,8 @@
  	<script>
  	var websocket = null;
  	var $table = $('#tablestatus');
- 	
+ 	var projectId = "<s:property value='projId'/>";
+ 	console.log(projectId);
  	
     window.onload = function() { // URI = ws://10.16.0.165:8080/WebSocket/ws
     	connect('ws://' + window.location.host + '/FundstarterServer/ws');
@@ -90,7 +89,7 @@
     }
     
     function onOpen(event) {
-    	websocket.send("projid-15");  // TODO: IDPROJECT!!!!!!!!!!!!!!!!!!!!!!!!!
+    	websocket.send("projid-"+projectId);  // TODO: IDPROJECT!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     
     function onMessage(message) { // print the received message

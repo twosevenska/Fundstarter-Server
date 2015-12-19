@@ -84,7 +84,7 @@
      	$table.bootstrapTable('hideColumn', 'projId');
      	
      	$table.on('click-row.bs.table', function (e, row, $element) {
-     		window.location = 'projectPage';
+     		window.location = 'projectPage'+row.projId;
         });  	
     }
  	</script>

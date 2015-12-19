@@ -61,4 +61,18 @@ public class WebServerTools {
 			return false;
 		}
 	}
+	
+	public String viewprojecttitle(String id)
+	{
+		content = new Hashtable<String,String>();
+		content.put("projId", id);
+		return ducktatorServer.getProjectData(content).elements.get("title");
+	}
+	
+	public String viewprojectdescription(String id)
+	{
+		content = new Hashtable<String,String>();
+		content.put("projId", id);
+		return ducktatorServer.getProjectData(content).elements.get("description");
+	}
 }
