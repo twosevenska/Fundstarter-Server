@@ -11,7 +11,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
         	<div class="navbar-form navbar-right">
-	           <a href="<s:url action='welcome'/>" class="btn btn-success" role="button">Sign in</a>
+	           <a href="<s:url action='loginUser'/>" class="btn btn-success" role="button">Sign in</a>
 	           <a href="<s:url action='create'/>" class="btn btn-success" role="button">Register</a>
 	        </div>
         </div><!--/.navbar-collapse -->

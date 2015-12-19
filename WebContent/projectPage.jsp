@@ -90,7 +90,7 @@
     }
     
     function onOpen(event) {
-    	websocket.send("15");  // TODO: IDPROJECT!!!!!!!!!!!!!!!!!!!!!!!!!
+    	websocket.send("projid-15");  // TODO: IDPROJECT!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     
     function onMessage(message) { // print the received message

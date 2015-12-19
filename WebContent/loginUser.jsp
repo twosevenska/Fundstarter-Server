@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,13 +22,13 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 	    <div class="container col-md-4">
-	      <form action="login" method="post" class="form-signin">
+	      <s:form theme="simple" action="login" method="post" class="form-signin">
 	        <h2 class="form-signin-heading">Welcome!</h2>
 	        <h2 class="form-signin-heading">Check your privilege</h2>
-			<s:textfield key="userName" class="form-control" label="" />
-	        <s:password key="password" class="form-control"  label="" />
-	        <s:submit class="btn btn-lg btn-primary btn-block" label="Login" />
-	      </form>
+			<s:textfield name="userName" cssClass="form-control"/>
+	        <s:password name="password" cssClass="form-control"/>
+	        <s:submit cssClass="btn btn-lg btn-primary btn-block" label="Login" />
+	      </s:form>
 	    </div>
 	    <div class="col-md-7"></div>
 	</div>

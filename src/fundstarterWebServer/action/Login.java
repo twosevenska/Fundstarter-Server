@@ -21,14 +21,17 @@ public class Login extends ActionSupport implements SessionAware {
 	
 	   public String login() {
 	       String loggedUserName = null;
-	
+	       
+	       int uid = loginUser(userName, password);
+	       
 	       // if no userName stored in the session,
 	       // check the entered userName and password
-	       if (userName != null && password != null && loginUser(userName, password) != 0) {
+	       if (userName != null && password != null && uid != 0) {
 	            
 	           // add userName to the session
 	           sessionMap.put("userName", userName);
-	            
+	           sessionMap.put("userId", ""+uid); 
+	           
 	           return SUCCESS; // return welcome page
 	       }
 	        

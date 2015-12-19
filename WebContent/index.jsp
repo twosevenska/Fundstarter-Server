@@ -32,8 +32,7 @@
 			<div class="col-md-12">
 			<table id="table" class="projects-table"></table></div>
 		</div>	
-		<center><a href="<s:url action='hello'/>">Go to sample project</a></center>
-		<center><a href="<s:url action='user'/>">Go to sample user panel</a></center>
+		<center><a href="<s:url action='projectPage'/>">Go to sample project</a></center>
 	</div>
 	
 	<!-- Scripts -->
@@ -85,7 +84,7 @@
      	$table.bootstrapTable('hideColumn', 'projId');
      	
      	$table.on('click-row.bs.table', function (e, row, $element) {
-     		window.location = 'hello';
+     		window.location = 'projectPage';
         });  	
     }
  	</script>

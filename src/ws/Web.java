@@ -49,49 +49,87 @@ public class Web {
 		// one should never trust the client, and sensitive HTML
         // characters should be replaced with &lt; &gt; &quot; &amp;
 		
+		String[] parts = message.split("-");
 		// test values
 		
 		if (message.equals("refreshallprojects"))
 		{
 			refreshAllProjects();
 		}
-		else
+		else if (parts[0].equals("projid"))
 		{
-			Hashtable<String, String> stuff = new Hashtable<String, String>();
-			type = "refreshproject";
-			id = message;
-			
-			System.out.println("1");
-			
-			stuff = new Hashtable<String, String>();
-			stuff.put("projId" ,id);
-			
-			System.out.println("2");
-			
-			servertools.getProjectData(stuff);
-			
-			
-			System.out.println("3");
-			Com_object getProjectData = servertools.getProjectData(stuff);
-			
-			
-			System.out.println("4");
-			HashMap<String, String> map = new HashMap<String, String>(getProjectData.elements);
-			
-			System.out.println("5");
-			JSONObject jsonobject = new JSONObject(map);
-			
-			System.out.println("6");
-			try {
-				session.getBasicRemote().sendText(jsonobject+"");
-				
-				System.out.println("7");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("erro na socket");
-			}
+			refreshproject(parts[1]);
+		}
+		else if (parts[0].equals("userId"))
+		{
+			refreshmyprojects(parts[1]);
 		}
     }
+
+	private void refreshmyprojects(String id)
+	{
+		int flag=0;
+		type = "projectList";
+		int i;
+		String json="{\"columns\": [{\"field\": \"projId\", \"title\": \"id\"},{ \"field\": \"title\", \"title\": \"Project\"}, { \"field\": \"active\", \"title\": \"Current Status\"  }, {  \"field\": \"progress\", \"title\": \"Progress\" },{ \"field\": \"endDate\",  \"title\": \"Final Date\"  },{  \"field\": \"link\",  \"title\": \"Link\" }], \"data\":[";
+		Hashtable<String, String> content = new Hashtable<String, String>();
+		content.put("userId", id);
+		Com_object object = servertools.getMyProjectsList(content);
+		
+		if (object.menuList.menuID.length>0)
+		{
+			flag = 1;
+			Hashtable<String, String> stuff = new Hashtable<String, String>();
+			stuff.put("projId" ,object.menuList.menuID[0]);
+			Com_object getProjectData = servertools.getProjectData(stuff);
+			HashMap<String, String> map = new HashMap<String, String>(getProjectData.elements);
+			JSONObject jsonobject = new JSONObject(map);
+			json = json+jsonobject+"";
+			for (i=1; i<object.menuList.menuID.length; i++)
+			{
+				json = json+",";
+				stuff = new Hashtable<String, String>();
+				System.out.print(object.menuList.menuID[i]);
+				stuff.put("projId" ,object.menuList.menuID[i]);
+				getProjectData = servertools.getProjectData(stuff);
+				map = new HashMap<String, String>(getProjectData.elements);
+				jsonobject = new JSONObject(map);
+				json = json+" "+jsonobject;
+				System.out.println(jsonobject);
+			}
+			
+		}
+		System.out.println("foi enviado o seguinte objecto JSON "+json);
+		sendMessage(json+"]}");//envia para todos os users
+	}
+	
+	private void refreshproject(String message)
+	{
+		Hashtable<String, String> stuff = new Hashtable<String, String>();
+		type = "refreshproject";
+		id = message;
+		
+
+		stuff = new Hashtable<String, String>();
+		stuff.put("projId" ,id);
+		
+		servertools.getProjectData(stuff);
+		
+		Com_object getProjectData = servertools.getProjectData(stuff);
+		
+		HashMap<String, String> map = new HashMap<String, String>(getProjectData.elements);
+
+		JSONObject jsonobject = new JSONObject(map);
+		
+		try {
+			session.getBasicRemote().sendText(jsonobject+"");
+			
+			System.out.println("7");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("erro na socket");
+		}
+	}
 	
 	private void refreshAllProjects()
 	{
@@ -122,7 +160,6 @@ public class Web {
 				json = json+" "+jsonobject;
 				System.out.println(jsonobject);
 			}
-			
 		}
 		object =  servertools.getOldMenu(null); 
 		if (object.menuList.menuID.length>0)

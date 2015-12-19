@@ -353,7 +353,7 @@ public class serverRequestTools {
 			answerHash.put("projectStatus", "0"); // 0 == Success, 1 == Failure
 		else 
 			answerHash.put("projectStatus", "1"); // 0 == Success, 1 == Failure
-		
+		answerHash.put("projId", var+"");
 		answer = new Com_object(id, operationtype.create_proj, answerHash);
 		
 		return answer;

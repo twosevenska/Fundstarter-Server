@@ -31,7 +31,7 @@
 		
 		<div class="row project-title">
 			<div class="col-md-1">
-				<a href="<s:url action='create-project'/>" class="btn btn-primary btn-large">Create Project</a>
+				<a href="<s:url action='createProjectPage'/>" class="btn btn-primary btn-large">Create Project</a>
 			</div>
 		</div>
 		
@@ -89,69 +89,70 @@
  	<script src="res/bootstrap-table/bootstrap-table.js"></script>
  	<!-- Populate Grid -->
  	<script>
- 	$('#my-projects-table').bootstrapTable({
- 	    columns: [{
- 	        field: 'name',
- 	        title: 'Project'
- 	    }, {
- 	        field: 'status',
- 	        title: 'Current Status'
- 	    }, {
- 	        field: 'percentage',
- 	        title: 'Goal'
- 	    },{
- 	        field: 'date',
- 	        title: 'Final Date'
- 	    },{
- 	        field: 'link',
- 	        title: 'Link'
- 	    }],
- 	    data: [{
- 	        name: 'Futurama',
- 	       	status: 'Active',
- 	      	percentage: '99999%',
- 	      	date: '31-02-2016',
- 	      	link: 'Lorem' 
- 	    }, {
- 	        name: 'Firefly',
- 	       	status: 'Canceled - But in our hearts',
- 	      	percentage: '99999%',
- 	      	date: '31-02-2016',
- 	      	link: 'Lorem' 
- 	    }]
- 	});
+ 	var websocket = null;
+ 	var $table = $('#my-projects-table');
+ 	var selectedServer = "<s:property value='%{#session.userId}'/>";
+ 	 	
+ 	window.onload = function() { // URI = ws://10.16.0.165:8080/WebSocket/ws
+ 	  	connect('ws://' + window.location.host + '/FundstarterServer/ws');
+ 	}
+
+ 	function connect(host) { // connect to the host websocket
+ 	    if ('WebSocket' in window)
+ 	    	websocket = new WebSocket(host);
+ 	    else if ('MozWebSocket' in window)
+ 	       	websocket = new MozWebSocket(host);
+ 	    else {
+ 	            writeToHistory('Get a real browser which supports WebSocket.');
+ 	            return;
+ 	    }
+
+ 	        websocket.onopen    = onOpen; // set the event listeners below
+ 	        websocket.onmessage = onMessage;
+ 	        
+ 	}
+ 	    
+ 	    function onOpen(event) {
+ 	    	websocket.send("userId-"+selectedServer); 
+ 	    }
+ 	    
+ 	    function onMessage(message) { // print the received message
+ 	        writeToHistory(message.data);
+ 	        console.log(message.data);
+ 	    }
+ 	    
+ 	    function writeToHistory(text) {
+ 	    	var jsonstuff = JSON.parse(text);
+ 	    	$table.bootstrapTable('destroy');
+ 	     	$table.bootstrapTable(jsonstuff);
+ 	     	$table.bootstrapTable('hideColumn', 'projId');
+ 	     	
+ 	     	$table.on('click-row.bs.table', function (e, row, $element) {
+ 	     		window.location = 'hello';
+ 	        });  	
+ 	    }
  	</script>
  	
  	 <script>
  	$('#my-rewards-table').bootstrapTable({
- 	    columns: [{
- 	        field: 'name',
- 	        title: 'Project'
+ 	    "columns": [{
+ 	        "field": "proj",
+ 	        "title": "Project Name"
  	    }, {
- 	        field: 'status',
- 	        title: 'Current Status'
+ 	        "field": "needed",
+ 	        "title": "Money needed"
  	    }, {
- 	        field: 'percentage',
- 	        title: 'Goal'
- 	    },{
- 	        field: 'date',
- 	        title: 'Final Date'
- 	    },{
- 	        field: 'link',
- 	        title: 'Link'
+ 	        "field": "description",
+ 	        "title": "Description"
  	    }],
- 	    data: [{
- 	        name: 'Futurama',
- 	       	status: 'Active',
- 	      	percentage: '99999%',
- 	      	date: '31-02-2016',
- 	      	link: 'Lorem' 
+ 	    "data": [{
+ 	        "proj": "Futurama",
+ 	       	"needed": "1000",
+ 	       	"description": "Fry",
  	    }, {
- 	        name: 'Firefly',
- 	       	status: 'Canceled - But in our hearts',
- 	      	percentage: '99999%',
- 	      	date: '31-02-2016',
- 	      	link: 'Lorem' 
+ 	    	"proj": "Futurama",
+ 	    	"needed": "1000",
+  	       	"description": "Fry"
  	    }]
  	});
  	</script>

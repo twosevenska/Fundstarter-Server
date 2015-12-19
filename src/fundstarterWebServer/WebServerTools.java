@@ -30,12 +30,29 @@ public class WebServerTools {
 		}
 	}
 	
-	public Boolean createproject(Menu_list vote_options, Hashtable <String, String> externalcontent)
+	
+	public String createproject(String[] voteOptions, Hashtable <String, String> externalcontent){
+		String[] idList = {};
+		Menu_list vote_options = new Menu_list(voteOptions, idList);
+		
+		return createprojectPut(vote_options, externalcontent);
+		
+	}
+	
+	private String createprojectPut(Menu_list vote_options, Hashtable <String, String> externalcontent)
 	{
 	
 		globalobject = new Com_object(0,operationtype.check_wallet,externalcontent,vote_options);
 		globalobject = ducktatorServer.createProject(globalobject, globalobject.elements);
-		if (globalobject.elements.get("projectStatus") == "0")
+		return globalobject.elements.get("projId");
+	}
+	
+	public Boolean createreward(Hashtable <String, String> externalcontent)
+	{
+	
+		globalobject = new Com_object(0,operationtype.check_wallet,externalcontent);
+		globalobject = ducktatorServer.createTier(externalcontent);
+		if (globalobject.elements.get("tierStatus") == "0")
 		{
 			return true;
 		}

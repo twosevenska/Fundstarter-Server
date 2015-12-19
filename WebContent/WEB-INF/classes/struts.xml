@@ -13,30 +13,30 @@
         render the result index.jsp -->
         <!-- If no name value for the result node is specified the success value is the default -->
 		<action name="index">
-			<result>/index.jsp</result>
+			<result>index.jsp</result>
 		</action>
 		
-		<!-- If the URL is hello.action the call the execute method of class HelloWorldAction.
-		If the result returned by the execute method is success render the HelloWorld.jsp -->
-		<action name="hello" class="fundstarterWebServer.action.HelloWorldAction" method="execute">
-			<result name="success">/HelloWorld.jsp</result>
-		</action>
-		
-		<action name="user">
-			<result>logged/user.jsp</result>
-		</action>
-		
-		<action name="create-project">
-			<result>logged/create.jsp</result>
-		</action>
-		
-		<action name="reward">
-			<result>logged/reward.jsp</result>
-		</action>
-		
-		<action name="welcome">
-			<result>welcome.jsp</result>
+		<action name="loginUser">
+			<result>loginUser.jsp</result>
         </action>
+        
+       	<action name="projectPage">
+			<result>projectPage.jsp</result>
+        </action>
+        
+        <action name="register" class="fundstarterWebServer.action.Register">
+            <result name="success">index.jsp</result>
+            <result name="error">create.jsp</result>
+        </action>
+		
+		<action name="logout" class="fundstarterWebServer.action.Login"
+                method="logout">
+            <result name="success">index.jsp</result>
+        </action>
+        
+        <action name="forum">
+			<result>/forum.jsp</result>
+		</action>
 		
 		<action name="login" class="fundstarterWebServer.action.Login"
                 method="login">
@@ -44,24 +44,23 @@
             <result name="input">index.jsp</result>
         </action>
 		
-		<action name="logout" class="fundstarterWebServer.action.Login"
-                method="logout">
-            <result name="success">index.jsp</result>
-        </action>
-		
-		<action name="create">
-			<result>create.jsp</result>
+		<action name="user" class="fundstarterWebServer.action.UserPanel"
+                method="checkPrivilege">
+            <result name="success">logged/user.jsp</result>
+            <result name="input">index.jsp</result>
+		</action>
+	
+		<action name="createProjectPage" class="fundstarterWebServer.action.CreateProjectPage">
+			<result name="success">logged/create.jsp</result>
+            <result name="input">index.jsp</result>
 		</action>
 		
-		<action name="register" class="fundstarterWebServer.action.Register">
-            <result name="success">index.jsp</result>
-            <result name="error">create.jsp</result>
-        </action>
-		
-		<action name="forum">
-			<result>/forum.jsp</result>
+		<action name="projectCreation" class="fundstarterWebServer.action.CreateProject">
+			<result name="success">logged/user.jsp</result>
+            <result name="input">logged/index.jsp</result>
 		</action>
 		
+
 	</package>
 
 </struts>
