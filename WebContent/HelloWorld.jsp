@@ -71,7 +71,7 @@
  	
  	
     window.onload = function() { // URI = ws://10.16.0.165:8080/WebSocket/ws
-    	connect('ws://' + window.location.host + '/fundstarterServer/ws');
+    	connect('ws://' + window.location.host + '/FundstarterServer/ws');
     }
 
     function connect(host) { // connect to the host websocket

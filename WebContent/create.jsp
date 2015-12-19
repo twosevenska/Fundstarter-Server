@@ -21,13 +21,13 @@
 	<div class="row">
 		<div class="col-md-4"></div>
 	    <div class="container col-md-4">
-	      <form class="form-signin">
+	      <s:form action="register" class="form-signin">
 	        <h2 class="form-signin-heading">Welcome!</h2>
-	        <h2 class="form-signin-heading">Check your privilege</h2>
-			<s:textfield key="user" class="form-control" placeholder="username" required="true"/>
-	        <s:password key="pass" class="form-control" placeholder="Password" required="true"/>
-	        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-	      </form>
+	        <h2 class="form-signin-heading">Obtain your privilege</h2>
+			<s:textfield name="registerStore.username" class="form-control" placeholder="username" required="true"/>
+	        <s:password name="registerStore.password" class="form-control" placeholder="Password" required="true"/>
+	        <s:submit class="btn btn-lg btn-primary btn-block" label="Register" />
+	      </s:form>
 	    </div>
 	    <div class="col-md-4"></div>
 	</div>

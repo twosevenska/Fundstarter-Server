@@ -25,14 +25,11 @@
     <div class="project-body">
 		<div class="row project-title">
 			<div class="col-md-8">
-				<h1>Mr.Teapot</h1>
+				<h1><s:property value="#session.userName" /></h1>
 			</div>
 		</div>
 		
 		<div class="row project-title">
-			<div class="col-md-1">
-				<div id="addFunds"><a data-toggle="modal" href="#add-Funds" class="btn btn-primary btn-large">Add Funds</a></div>
-			</div>
 			<div class="col-md-1">
 				<a href="<s:url action='create-project'/>" class="btn btn-primary btn-large">Create Project</a>
 			</div>

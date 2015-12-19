@@ -9,18 +9,6 @@
 
 	<package name="basicstruts2" extends="struts-default">
 
-		<interceptors>
-	 		<interceptor-stack name="appDefault">
-	        	 <interceptor-ref name="defaultStack">
-	      			<param name="exception.logEnabled">true</param>
-	      			<param name="exception.logLevel">ERROR</param>
-	      			<param name="params.excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*</param>
-	   			</interceptor-ref>
-	 	    </interceptor-stack>
-		</interceptors>
-		
-		<default-interceptor-ref name="appDefault" />
-
         <!-- If no class attribute is specified the framework will assume success and 
         render the result index.jsp -->
         <!-- If no name value for the result node is specified the success value is the default -->
@@ -64,6 +52,11 @@
 		<action name="create">
 			<result>create.jsp</result>
 		</action>
+		
+		<action name="register" class="fundstarterWebServer.action.Register">
+            <result name="success">index.jsp</result>
+            <result name="error">create.jsp</result>
+        </action>
 		
 		<action name="forum">
 			<result>/forum.jsp</result>
